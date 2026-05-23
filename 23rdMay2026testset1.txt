@@ -1,0 +1,43 @@
+2.select * from employees where salary>(select avg(salary) from employees where dept_id=(select dept_id from departments where dept_name='IT'));
+
+3.select d.dept_name,sum(e.salary) from employees e join departments d on e.dept_id=d.dept_id group by d.dept_name;
+
+4.select d.dept_name, count(e.emp_id),avg(e.salary) from employees e join departments d on e.dept_id=d.dept_id group by d.dept_name having count(e.emp_id)>2 and avg(e.salary)>70000;
+
+5.SELECT e.name AS employee,m.name AS manager FROM Employees e LEFT JOIN Employees m ON e.manager_id = m.emp_id;
+
+6.select name,salary from employees order by salary desc limit 3;
+
+7.select e.name from employees e join jobs j on e.job_id=j.job_id join departments d on e.dept_id=d.dept_id where j.job_title='developer' and d.location='san francisco';
+
+8.select year(hire_date) as hire_year, count(emp_id) from employees group by year(hire_date);
+
+9.select j.job_title,max(e.salary) as max_salary from jobs j join employees e on j.job_id=e.job_id group by j.job_title having max(e.salary)<100000;
+
+
+10.SELECT name FROM Employees WHERE dept_id = (SELECT dept_id FROM Employees WHERE name = 'David');
+
+12.SELECT name, salary, hire_date FROM Employees WHERE hire_date BETWEEN '2018-01-01' AND '2020-12-31'AND salary > 60000;
+
+14.SELECT j.job_title, e.salary FROM Employees e JOIN Jobs j ON e.job_id = j.job_id WHERE e.emp_id = 504;
+
+15.SELECT manager_id, MIN(salary) AS minimum_salary FROM Employees WHERE manager_id IS NOT NULL GROUP BY manager_id;
+
+
+17.SELECT MAX(salary) - MIN(salary) AS salary_difference FROM Employees;
+
+18.SELECT e.name, e.hire_date, d.dept_name, e.salary FROM Employees e JOIN Departments d ON e.dept_id = d.dept_id ORDER BY d.dept_name ASC, e.salary DESC;
+
+
+19.SELECT manager_id, COUNT(*) AS employee_count FROM Employees WHERE manager_id IS NOT NULL GROUP BY manager_id HAVING COUNT(*) > 2;
+
+
+20. SELECT name, salary FROM Employees WHERE salary = (SELECT DISTINCT salary FROM Employees ORDER BY salary DESC LIMIT 1 OFFSET 2);
+
+
+22.SELECT e.name FROM Employees e JOIN Departments d ON e.dept_id = d.dept_id WHERE d.dept_name = 'Finance' AND e.name LIKE '%i%';
+
+24.SELECT dept_name FROM Departments WHERE dept_id = (SELECT dept_id FROM Employees GROUP BY dept_id ORDER BY SUM(salary) DESC LIMIT 1);
+
+
+25.SELECT e.name FROM Employees e JOIN Employees m ON e.manager_id = m.emp_id WHERE m.name = 'Charlie';
